@@ -1,0 +1,125 @@
+<meta charset="utf-8">
+
+<div ng-show="currentView == 'competition'" class="competition">
+  <div class="group-name">
+    <span>COMPETITION</span>
+  </div>
+  <ul ng-show="currentView == 'competition'" class="competitions">
+    <li ng-click="startCompetition('worldCup')" class="competition-choice worldcup">Coupe du Monde</li>
+    <li ng-click="startCompetition('c1')" class="competition-choice c1">Ligue des Champions</li>
+    <li ng-click="startCompetition('ligue1')" class="competition-choice ligue1">Ligue 1</li>
+  </ul>
+</div>
+
+<div ng-show="currentView == 'coupe'" class="tableau-final">
+  <div class="group-name">
+    <span>TABLEAU FINAL</span>
+    <button ng-click="goToGroupes()" class="go-to">Groupes</button>
+  </div>
+  <div ng-repeat="round in coupe.rounds" class="round">
+    <ul>
+      <li ng-repeat="match in round" class="match">
+        <div class="equipe equipe-dom">
+            <span>{{match.dom.nom}}</span>
+            <div class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
+          </div>
+        <div class="score" ng-show="match.butsDom != null">
+          <span ng-show="match.butsDom == match.butsExt && match.equipeTab == match.dom">t </span>
+          <span>{{match.butsDom}} - {{match.butsExt}}</span>
+          <span ng-show="match.butsDom == match.butsExt && match.equipeTab == match.ext"> t</span>
+        </div>
+        <div class="score" ng-show="match.butsDom == null"><button  ng-click="simulate(null, match)">Simu</button></div>
+        <div class="equipe equipe-ext">
+          <div class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
+          <span>{{match.ext.nom}}</span>
+        </div>
+
+        <div ng-show="match.matchRetour" class="equipe equipe-dom">
+            <span>{{match.matchRetour.dom.nom}}</span>
+            <div class="fflag fflag-{{match.matchRetour.dom.flag}} ff-lg"></div>
+          </div>
+        <div class="score" ng-show="match.matchRetour && match.matchRetour.butsDom != null">
+          <span ng-show="match.matchRetour.butsDom == match.matchRetour.butsExt && match.matchRetour.equipeTab == match.matchRetour.dom">t </span>
+          <span>{{match.matchRetour.butsDom}} - {{match.matchRetour.butsExt}}</span>
+          <span ng-show="match.matchRetour.butsDom == match.matchRetour.butsExt && match.matchRetour.equipeTab == match.matchRetour.ext"> t</span>
+        </div>
+        <div class="score" ng-show="match.matchRetour && match.matchRetour.butsDom == null"><button  ng-click="simulate(null, match.matchRetour)">Simu</button></div>
+        <div ng-show="match.matchRetour" class="equipe equipe-ext">
+          <div class="fflag fflag-{{match.matchRetour.ext.flag}} ff-lg"></div>
+          <span>{{match.matchRetour.ext.nom}}</span>
+        </div ng-if-end>
+
+      </li>
+    </ul>
+    <button ng-show="round.length > 1" ng-click="coupe.computeNextRound()">Next</button>
+  </div>
+</div>
+
+<div ng-show="currentView == 'groupe'" class="groupe">
+  <div class="group-name">
+    <button ng-show="currentGroupeIndex > 0" ng-click="previousGroupe()">&lt;</button>
+    <span>GROUPE {{currentGroupeIndex+1}}</span>
+    <button ng-show="currentGroupeIndex < groupes.length-1" ng-click="nextGroupe()">&gt;</button>
+
+    <button ng-click="simulateAll(currentGroupe)" class="simulate-all">Simu All</button>
+    <button ng-click="goToTableauFinal()" class="go-to">Tableau Final</button>
+  </div>
+
+  <ul class="journees">
+    <li ng-repeat="journee in currentGroupe.journees" class="journee">
+      <ul>
+        <li class="journee-name">JOURNEE {{$index+1}}</li>
+        <li ng-repeat="match in journee" class="match">
+          <div class="equipe equipe-dom">
+            <span>{{match.dom.nom}}</span>
+            <div ng-show="match.dom.flag" class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
+            <div ng-show="match.dom.maillot" class="maillot" ng-style="{background: match.dom.maillot}"></div>
+          </div>
+          <div class="score" ng-show="match.butsDom != null">{{match.butsDom}} - {{match.butsExt}}</div>
+          <div class="score" ng-show="match.butsDom == null"><button ng-click="simulate(currentGroupe, match)">Simu</button></div>
+          <div class="equipe equipe-ext">
+            <div ng-show="match.ext.flag" class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
+            <div ng-show="match.dom.maillot" class="maillot" ng-style="{background: match.ext.maillot}"></div>
+            <span>{{match.ext.nom}}</span>
+          </div>
+
+<!--       <div class="buteurs">{{match.buteursDom.join(', ')}}</div>
+           <div class="buteurs">{{match.buteursExt.join(', ')}}</div> -->
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <table class="classement">
+    <tr><th>#</th><th>Equipe</th><th>Pts</th><th>J</th><th>V</th><th>N</th><th>D</th><th>BP</th><th>BC</th><th>GA</th></tr>
+    
+      <tr ng-repeat="stat in currentGroupe.classement">
+        <td>{{$index+1}}.</td>
+        <td class="nom">
+          <div ng-show="stat.equipe.flag" class="fflag fflag-{{stat.equipe.flag}} ff-lg"></div>
+          <div ng-show="stat.equipe.maillot" class="maillot" ng-style="{background: stat.equipe.maillot}"></div>
+          <span>{{stat.equipe.nom}}</span>
+        </td>
+        <td class="pts">{{stat.v*3 + stat.n}}</td>
+        <td>{{stat.v + stat.n + stat.d}}</td>
+        <td>{{stat.v}}</td>
+        <td>{{stat.n}}</td>
+        <td>{{stat.d}}</td>
+        <td>{{stat.bp}}</td>
+        <td>{{stat.bc}}</td>
+        <td><span ng-show="stat.bp-stat.bc > 0">+</span>{{stat.bp-stat.bc}}</td>
+    </tr>
+  </table>
+
+<!--   <ul id="buteurs">
+    <li ng-repeat="b in buteurs | orderBy:nbButs:true">
+      {{b.nom}} ({{b.equipe}})... {{b.buts}}
+    </li>
+  </ul> -->
+
+  
+
+</div>
+
+
+

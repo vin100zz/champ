@@ -1,0 +1,176 @@
+html, body, body > div, body > div > div {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+}
+body {
+  background: #7272A7;
+  color: white;
+  box-sizing: border-box;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+button {
+  padding: 0;
+  background: none;
+  border: none;
+  color: #aaa;
+  font-size: 80%;
+}
+* {
+  box-sizing: border-box;
+}
+.fflag.ff-lg {
+  zoom: 60%;
+  margin: 0 10px;
+}
+
+/* Competition */
+.competitions {
+  padding: 20px;
+}
+.competition-choice {
+  position: relative;
+  margin-bottom: 20px;
+  padding: 20px 20px 20px 60px;
+  background: #646491;
+  font-size: 120%;
+}
+.competition-choice:before {
+  content: '';
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-size: cover;
+  opacity: 60%;
+}
+.competition-choice.worldcup:before {
+  background-image: url(worldcup.png);
+}
+.competition-choice.c1:before {
+  background-image: url(c1.png);
+}
+.competition-choice.ligue1:before {
+  background-image: url(ligue1.png);
+}
+
+/* Groupe */
+.groupe {
+  position: relative;
+  margin-bottom: 20px;
+}
+.group-name {
+  text-align: center;
+  padding: 10px;
+  font-size: 120%;
+  font-weight: bold;
+  background: #333;
+  color: silver;
+}
+
+.simulate-all {
+  float: left;
+}
+.go-to {
+  float: right;
+}
+
+/* Journees */
+.journees {
+  height: calc(100% - 200px);
+  overflow-y: auto;
+  resize: vertical;
+}
+.journee {
+  margin-bottom: 10px;
+}
+.journee-name {
+  padding: 5px;
+  background: #4D4D70;
+  color: gold;
+}
+
+/* Match */
+.match:nth-child(even) {
+  background: #646491;
+}
+.match > * {
+  display: inline-block;
+}
+.match .equipe {
+  width: 41%;
+  padding: 5px;
+}
+.match .score {
+  width: 15%;
+  padding: 5px;
+  text-align: center;
+  font-size: 110%;
+  font-weight: bold;
+  background: #333;
+  color: silver;
+}
+.match .equipe-dom {
+  text-align: right;
+}
+
+/* Classement */
+.classement {
+	width: 100%;
+}
+.classement {
+  text-align: center;
+  font-weight: normal;
+}
+.classement th {
+  padding: 5px;
+  background: #4D4D70;
+  color: gold;
+}
+.classement tr:nth-child(even) {
+  background: #646491;
+}
+.classement td {
+  padding: 5px;
+}
+.classement .pts {
+  background: #333;
+  color: silver;
+}
+.classement .nom {
+  text-align: left;
+}
+
+/* Maillot */
+.maillot {
+  display: inline-block;
+  width: 22px;
+  height: 22px;
+  margin: 0 5px;
+  border: 1px solid black;
+  border-radius: 100%;
+  vertical-align: bottom;
+}
+
+
+
+
+#buteurs {
+  position: absolute;
+  right: 20px;
+  top: 500px;
+}
+.buteurs {
+  display: block;
+  font-style: italic;
+  font-size: 90%;
+  color: #666;
+}
+.buteurs span {
+  margin-right: 10px;
+}

@@ -1,0 +1,632 @@
+var JOUEURS = [
+  {
+    "name": "Angers SCO",
+    "players": [
+      {
+        "name": "Sada Thioub",
+        "poste": "M (R), AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Loïs Diony",
+        "poste": "AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Franck Magri",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Ebenezer Simons de Fanti",
+        "poste": "AM (R), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Mathis Lopes",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "AS Monaco",
+    "players": [
+      {
+        "name": "Kevin Volland",
+        "poste": "M/AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Stevan Jovetic",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Willem Geubbels",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Gobé Gouano",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Salam Jiddou",
+        "poste": "M (C), AM (LC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Nazim Babaï",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "AS Saint-Etienne",
+    "players": [
+      {
+        "name": "Wahbi Khazri",
+        "poste": "AM (LC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jérémie Porsan-Clemente",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Maxence Rivera",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "Dijon FCO",
+    "players": [
+      {
+        "name": "Roger Assalé",
+        "poste": "AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Moussa Konaté",
+        "poste": "AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Mama Baldé",
+        "poste": "D/M (R), AM (RL), ST (C)",
+        "rating": 3
+      }
+    ]
+  },
+  {
+    "name": "FC Girondins de Bordeaux",
+    "players": [
+      {
+        "name": "Nicolas De Préville",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Hwang Ui-Jo",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Hatem Ben Arfa",
+        "poste": "AM (RC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jimmy Briand",
+        "poste": "AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Samuel Kalu",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Gabriel Lemoine",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "FC Lorient",
+    "players": [
+      {
+        "name": "Yoane Wissa",
+        "poste": "M/AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Adrian Grbic",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Sylvain Marveaux",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Jérémy Kumbi",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Mouhamed Sadjo",
+        "poste": "M/AM (C), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "FC Metz",
+    "players": [
+      {
+        "name": "Thierry Ambrose",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Lamine Guèye",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Pape Ndiaga Yade",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Milan Robin",
+        "poste": "AM (C), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Aladji Doucouré",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Isyakha Touré",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "FC Nantes",
+    "players": [
+      {
+        "name": "Renaud Emond",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Quentin Merlin",
+        "poste": "M (L), AM (LC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Akram Tsagué",
+        "poste": "AM (C), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Edoly Lukoki",
+        "poste": "AM (RC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Ben Amine Idaroussi",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Romain Ekani",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "LOSC Lille",
+    "players": [
+      {
+        "name": "Jonathan Ikoné",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jonathan David",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jonathan Bamba",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Timothy Weah",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Eddy Ouattara",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Exaucé Mpembele Boula",
+        "poste": "AM (LC), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "Montpellier Hérault SC",
+    "players": [
+      {
+        "name": "Yanis Ammour",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Beni Makouana",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Yanis Guermouche",
+        "poste": "AM (C), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Nîmes Olympique",
+    "players": [
+      {
+        "name": "Renaud Ripart",
+        "poste": "M/AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Moussa Koné",
+        "poste": "M/AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Nolan Roux",
+        "poste": "AM (R), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Yassine Benrahou",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Amine Karraoui",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Sami Ben Amar",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "OGC Nice",
+    "players": [
+      {
+        "name": "Kasper Dolberg",
+        "poste": "AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Amine Gouiri",
+        "poste": "AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Myziane Maolida",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Dan Ndoye",
+        "poste": "M (R), AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Hicham Mahou",
+        "poste": "AM (LC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Timothé Trojani",
+        "poste": "AM (C), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Olympique de Marseille",
+    "players": [
+      {
+        "name": "Nemanja Radonjic",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Valère Germain",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Luís Henrique",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Marley Aké",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Mehdi Baaloudj",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Sacha Guilhen",
+        "poste": "AM (L), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Olympique Lyonnais",
+    "players": [
+      {
+        "name": "Memphis Depay",
+        "poste": "AM (LC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Karl Toko Ekambi",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Maxwel Cornet",
+        "poste": "D/WB/M (L), AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Tino Kadewere",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Rayan Cherki",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "El Hadj Coly",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "Paris Saint-Germain",
+    "players": [
+      {
+        "name": "Kylian Mbappé",
+        "poste": "AM (RL), ST (C)",
+        "rating": 4
+      },
+      {
+        "name": "Neymar",
+        "poste": "M (L), AM (LC), ST (C)",
+        "rating": 4
+      },
+      {
+        "name": "Jesé",
+        "poste": "M (RL), AM (RLC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Moise Kean",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Alexandre Fressange",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Cédric N'Koum",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "RC Lens",
+    "players": [
+      {
+        "name": "Corentin Jean",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Florian Sotoca",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Charles Boli",
+        "poste": "AM (RC), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Jader Valencia",
+        "poste": "AM (L), ST (C)",
+        "rating": 2
+      }
+    ]
+  },
+  {
+    "name": "RC Strasbourg Alsace",
+    "players": [
+      {
+        "name": "Majeed Waris",
+        "poste": "M/AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Kévin Zohi",
+        "poste": "AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Pavle Obradovic",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Kesley Keita",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Japhet Mbati",
+        "poste": "AM (L), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Stade Brestois 29",
+    "players": [
+      {
+        "name": "Gaëtan Charbonnier",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Irvin Cardona",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jérémy Le Douaron",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Killian Benvindo",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Rafiki Saïd",
+        "poste": "AM (RL), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Jérémy Le Saos",
+        "poste": "AM (RL), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Stade de Reims",
+    "players": [
+      {
+        "name": "Tasos Donis",
+        "poste": "M/AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Boulaye Dia",
+        "poste": "AM (R), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Fraser Hornby",
+        "poste": "AM (C), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Maxime Penneteau",
+        "poste": "AM (C), ST (C)",
+        "rating": 2
+      },
+      {
+        "name": "Moïse Sakava",
+        "poste": "AM (C), ST (C)",
+        "rating": 1
+      },
+      {
+        "name": "Noah Lobe",
+        "poste": "AM (R), ST (C)",
+        "rating": 1
+      }
+    ]
+  },
+  {
+    "name": "Stade Rennais FC",
+    "players": [
+      {
+        "name": "M’Baye Niang",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Martin Terrier",
+        "poste": "AM (RLC), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Serhou Guirassy",
+        "poste": "AM (L), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Adrien Hunou",
+        "poste": "AM (C), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Romain Del Castillo",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      },
+      {
+        "name": "Jérémy Doku",
+        "poste": "AM (RL), ST (C)",
+        "rating": 3
+      }
+    ]
+  }
+]
