@@ -52,12 +52,16 @@ button {
 .competition-choice.worldcup:before {
   background-image: url(worldcup.png);
 }
+.competition-choice.euro:before {
+  background-image: url(euro.png);
+}
 .competition-choice.c1:before {
   background-image: url(c1.png);
 }
 .competition-choice.ligue1:before {
   background-image: url(ligue1.png);
 }
+
 
 /* Groupe */
 .groupe {

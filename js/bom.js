@@ -31,12 +31,28 @@ var probas = [
    [ 0,  0,  0,  0,  0,  2, 10, 20, 50,  70,  80,  90, 100]
 ];
 
+var probas = [
+// [+7, +6, +5, +4, +3, +2, +1,  0, -1,  -2,  -3,  -4,  -5]
+   [ 4,  10, 20, 32, 49, 71, 98, 99, 99.5, 100, 100, 100, 100],
+   [ 0,  0,  0,  0,  5,  15, 35, 75, 90, 100, 100, 100, 100],
+   [ 0,  0,  0,  0,  0,   2,  6, 12, 30,  60,  80,  90, 100]
+];
+
 Score.get = function(equipeDom, equipeExt, competition)
 {
   var yRnd = Math.floor(Math.random() * 1000) / 10;
   var equipeTab = yRnd < 50 ? equipeDom : equipeExt;
 
   var diffNiveau = equipeDom.niveau - equipeExt.niveau;
+
+  var teamsSwapped = false;
+  if (competition.terrainNeutre && diffNiveau < 0) {
+    var tmp = equipeDom;
+    equipeDom = equipeExt;
+    equipeExt = tmp;
+    diffNiveau = -diffNiveau;
+    teamsSwapped = true;
+  }
 
   var max = probas[diffNiveau >= 0 ? 0 : 1];
   var min = probas[diffNiveau >= 0 ? 1 : 2];
@@ -45,7 +61,7 @@ Score.get = function(equipeDom, equipeExt, competition)
 
   var nbEcarts = probas[0].length;
 
-  var bases = [0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 3];
+  var bases = [0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3];
   var base = bases[Math.floor(Math.random()*bases.length)];
 
   var ecart = 7 - nbEcarts;
@@ -60,7 +76,11 @@ Score.get = function(equipeDom, equipeExt, competition)
     }
   }
 
-  // TODO: terrainNeutre
+  if (teamsSwapped) {
+    var tmp = equipeDom;
+    equipeDom = equipeExt;
+    equipeExt = tmp;
+  }
 
   console.log('Score', equipeDom.nom, equipeDom.niveau, ",", equipeExt.nom, equipeExt.niveau, ", rnd", yRnd, ", ecart", ecart, ", base", base);
 

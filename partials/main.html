@@ -6,6 +6,7 @@
   </div>
   <ul ng-show="currentView == 'competition'" class="competitions">
     <li ng-click="startCompetition('worldCup')" class="competition-choice worldcup">Coupe du Monde</li>
+    <li ng-click="startCompetition('euro')" class="competition-choice euro">Euro</li>
     <li ng-click="startCompetition('c1')" class="competition-choice c1">Ligue des Champions</li>
     <li ng-click="startCompetition('ligue1')" class="competition-choice ligue1">Ligue 1</li>
   </ul>
@@ -20,9 +21,10 @@
     <ul>
       <li ng-repeat="match in round" class="match">
         <div class="equipe equipe-dom">
-            <span>{{match.dom.nom}}</span>
-            <div class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
-          </div>
+          <span>{{match.dom.nom}}</span>
+          <div ng-show="!!match.dom.flag" class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
+          <div ng-show="match.dom.maillot" class="maillot" ng-style="{background: match.dom.maillot}"></div>
+        </div>
         <div class="score" ng-show="match.butsDom != null">
           <span ng-show="match.butsDom == match.butsExt && match.equipeTab == match.dom">t </span>
           <span>{{match.butsDom}} - {{match.butsExt}}</span>
@@ -30,14 +32,16 @@
         </div>
         <div class="score" ng-show="match.butsDom == null"><button  ng-click="simulate(null, match)">Simu</button></div>
         <div class="equipe equipe-ext">
-          <div class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
+          <div ng-show="!!match.ext.flag" class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
+          <div ng-show="match.ext.maillot" class="maillot" ng-style="{background: match.ext.maillot}"></div>
           <span>{{match.ext.nom}}</span>
         </div>
 
         <div ng-show="match.matchRetour" class="equipe equipe-dom">
-            <span>{{match.matchRetour.dom.nom}}</span>
-            <div class="fflag fflag-{{match.matchRetour.dom.flag}} ff-lg"></div>
-          </div>
+          <span>{{match.matchRetour.dom.nom}}</span>
+          <div ng-show="!!match.matchRetour.dom.flag" class="fflag fflag-{{match.matchRetour.dom.flag}} ff-lg"></div>
+          <div ng-show="match.matchRetour.dom.maillot" class="maillot" ng-style="{background: match.matchRetour.dom.maillot}"></div>
+        </div>
         <div class="score" ng-show="match.matchRetour && match.matchRetour.butsDom != null">
           <span ng-show="match.matchRetour.butsDom == match.matchRetour.butsExt && match.matchRetour.equipeTab == match.matchRetour.dom">t </span>
           <span>{{match.matchRetour.butsDom}} - {{match.matchRetour.butsExt}}</span>
@@ -45,7 +49,8 @@
         </div>
         <div class="score" ng-show="match.matchRetour && match.matchRetour.butsDom == null"><button  ng-click="simulate(null, match.matchRetour)">Simu</button></div>
         <div ng-show="match.matchRetour" class="equipe equipe-ext">
-          <div class="fflag fflag-{{match.matchRetour.ext.flag}} ff-lg"></div>
+          <div ng-show="!!match.matchRetour.ext.flag" class="fflag fflag-{{match.matchRetour.ext.flag}} ff-lg"></div>
+          <div ng-show="match.matchRetour.ext.maillot" class="maillot" ng-style="{background: match.matchRetour.ext.maillot}"></div>
           <span>{{match.matchRetour.ext.nom}}</span>
         </div ng-if-end>
 
@@ -72,14 +77,14 @@
         <li ng-repeat="match in journee" class="match">
           <div class="equipe equipe-dom">
             <span>{{match.dom.nom}}</span>
-            <div ng-show="match.dom.flag" class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
+            <div ng-show="!!match.dom.flag" class="fflag fflag-{{match.dom.flag}} ff-lg"></div>
             <div ng-show="match.dom.maillot" class="maillot" ng-style="{background: match.dom.maillot}"></div>
           </div>
           <div class="score" ng-show="match.butsDom != null">{{match.butsDom}} - {{match.butsExt}}</div>
           <div class="score" ng-show="match.butsDom == null"><button ng-click="simulate(currentGroupe, match)">Simu</button></div>
           <div class="equipe equipe-ext">
-            <div ng-show="match.ext.flag" class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
-            <div ng-show="match.dom.maillot" class="maillot" ng-style="{background: match.ext.maillot}"></div>
+            <div ng-show="!!match.ext.flag" class="fflag fflag-{{match.ext.flag}} ff-lg"></div>
+            <div ng-show="match.ext.maillot" class="maillot" ng-style="{background: match.ext.maillot}"></div>
             <span>{{match.ext.nom}}</span>
           </div>
 
@@ -96,7 +101,7 @@
       <tr ng-repeat="stat in currentGroupe.classement">
         <td>{{$index+1}}.</td>
         <td class="nom">
-          <div ng-show="stat.equipe.flag" class="fflag fflag-{{stat.equipe.flag}} ff-lg"></div>
+          <div ng-show="!!stat.equipe.flag" class="fflag fflag-{{stat.equipe.flag}} ff-lg"></div>
           <div ng-show="stat.equipe.maillot" class="maillot" ng-style="{background: stat.equipe.maillot}"></div>
           <span>{{stat.equipe.nom}}</span>
         </td>
